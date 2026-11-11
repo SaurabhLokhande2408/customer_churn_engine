@@ -47,8 +47,18 @@ The dated milestones below are based on the repository's Git commit history and 
 - The saved accuracy output is approximately **0.8836** (88.36%).
 - The latest commit message lists model tuning and ensemble learning as future work.
 
+### Thursday, 12 November 2026 — Modeling workflow modularized
+
+- Commit `3498bec` records modularizing the project and adds the root `main.py` orchestration flow and Python modules under `src/`.
+- The current workflow loads the data, imputes missing `Internet Type` and `Offer` values, encodes selected categorical features, and runs three classifiers: K-nearest neighbors (`n_neighbors=5`), logistic regression, and a decision tree.
+- Each trainer makes a stratified 80/20 train/test split with `random_state=42`. The KNN and logistic-regression trainers standardize the feature matrices; the decision-tree trainer uses the unscaled matrices.
+- The prediction module generates test predictions. The evaluation module prints accuracy, precision, recall, F1, ROC AUC, confusion matrix, and classification report for each model.
+- The current `main.py` runs all three model workflows and prints a heading before each model's metrics.
+- The current evaluation function prints its metrics and returns `None`; `main.py` calls it directly rather than printing that return value.
+
 ### Current implementation status
 
-- The saved modeling workflow is in `dataset/eda.ipynb`; the existing Python modules under `src/` remain empty.
-- `requirements.txt`, the root `README.md`, and the report files remain empty in the current repository snapshot.
-- Git reports an uncommitted modification to `dataset/eda.ipynb` after the latest commit.
+- The notebook-based EDA and modeling work remains saved in `dataset/eda.ipynb`; the modular workflow is implemented in `main.py` and the populated modules under `src/`.
+- The dataset used by the modular workflow is saved at `dataset/data/telco.csv`.
+- Model tuning, ensembling, and cross-validation are not implemented yet; their corresponding files under `src/` are empty.
+- The working tree contains uncommitted changes to `main.py`, `src/train.py`, and `src/predict.py` beyond the latest commit.
