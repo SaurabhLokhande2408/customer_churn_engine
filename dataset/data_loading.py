@@ -1,4 +1,7 @@
+from pathlib import Path
 import pandas as pd
+
 def data_loading():
-    data=pd.read_csv("D:/Programs/PROJECTS_SCRATCH/Telecom_Churn_prediction/customer-churn-engine/dataset/data/telco.csv")
+    data_path = Path(__file__).resolve().parent / "data" / "telco.csv"
+    data = pd.read_csv(data_path)
     return data
